@@ -4,39 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maze Generator and Solver</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        canvas {
+        #mazeCanvas {
             border: 2px solid #333;
-        }
-        .controls {
-            position: absolute;
-            top: 20px;
-            display: flex;
-            gap: 10px;
-            z-index: 1;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
+            background-color: white;
         }
     </style>
 </head>
-<body>
-    <div class="controls">
-        <button onclick="generateMazeDFS()">Generate DFS Maze</button>
-        <button onclick="generateMazeBFS()">Generate BFS Maze</button>
-        <button onclick="solveMazeDFS()">Solve DFS</button>
-        <button onclick="solveMazeBFS()">Solve BFS</button>
+<body class="flex justify-center items-center h-screen bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 font-sans m-0">
+    <div class="absolute top-8 flex gap-4">
+        <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="generateMazeDFS()">Generate DFS Maze</button>
+        <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-green-500 to-lime-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="generateMazeBFS()">Generate BFS Maze</button>
+        <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="solveMazeDFS()">Solve DFS</button>
+        <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="solveMazeBFS()">Solve BFS</button>
     </div>
     <canvas id="mazeCanvas"></canvas>
 
