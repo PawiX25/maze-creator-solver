@@ -9,56 +9,122 @@
         #mazeCanvas {
             border: 2px solid #333;
             background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
+
         .container {
             display: grid;
             grid-template-columns: 1fr;
-            grid-template-rows: auto 1fr auto;
-            gap: 1.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
+            grid-template-rows: auto auto 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 2rem auto;
             padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
             text-align: center;
         }
+
         .controls, .size-controls {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
             border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            padding: 1.5rem;
-            width: 100%;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .controls:hover, .size-controls:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
         .controls button, .size-controls button {
             margin: 0.5rem;
             padding: 0.75rem 1.5rem;
+            width: 100%;
+            max-width: 250px;
+            border-radius: 12px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
+        .controls button:hover, .size-controls button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
         .controls label, .size-controls label {
             display: block;
             margin: 0.5rem 0;
-            font-size: 1.125rem;
+            font-size: 1.2rem;
+            font-weight: 600;
             color: #333;
         }
+
         .size-controls input[type="range"] {
             width: 100%;
+            cursor: pointer;
+            appearance: none;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #4f46e5 0%, #8b5cf6 100%);
+            outline: none;
+            transition: background 0.3s ease;
         }
+
+        .size-controls input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .size-controls input[type="range"]::-webkit-slider-thumb:hover {
+            background: #6366f1;
+        }
+
         .maze-canvas-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .maze-canvas-wrapper:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
         @media (min-width: 768px) {
             .container {
                 grid-template-columns: 1fr 1fr;
                 grid-template-rows: auto 1fr;
                 gap: 2rem;
             }
+
             .maze-canvas-wrapper {
                 grid-column: 1 / span 2;
                 grid-row: 2;
             }
+
             .controls {
                 grid-column: 1;
                 grid-row: 1;
             }
+
             .size-controls {
                 grid-column: 2;
                 grid-row: 1;
@@ -66,17 +132,17 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 font-sans m-0 flex items-center justify-center h-screen">
+<body class="bg-gradient-to-br from-blue-300 via-purple-400 to-pink-400 font-sans m-0 flex items-center justify-center min-h-screen">
     <div class="container">
         <div class="maze-canvas-wrapper">
             <canvas id="mazeCanvas"></canvas>
         </div>
 
         <div class="controls flex flex-wrap justify-center gap-4">
-            <button class="text-lg font-semibold bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="generateMazeDFS()">Generate DFS Maze</button>
-            <button class="text-lg font-semibold bg-gradient-to-r from-green-500 to-lime-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="generateMazeBFS()">Generate BFS Maze</button>
-            <button class="text-lg font-semibold bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="solveMazeDFS()">Solve DFS</button>
-            <button class="text-lg font-semibold bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="solveMazeBFS()">Solve BFS</button>
+            <button class="text-lg font-semibold bg-gradient-to-r from-blue-500 to-teal-500 text-white hover:from-blue-600 hover:to-teal-600 shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="generateMazeDFS()">Generate DFS Maze</button>
+            <button class="text-lg font-semibold bg-gradient-to-r from-green-500 to-lime-500 text-white hover:from-green-600 hover:to-lime-600 shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="generateMazeBFS()">Generate BFS Maze</button>
+            <button class="text-lg font-semibold bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:from-yellow-600 hover:to-orange-600 shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="solveMazeDFS()">Solve DFS</button>
+            <button class="text-lg font-semibold bg-gradient-to-r from-red-500 to-pink-500 text-white hover:from-red-600 hover:to-pink-600 shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="solveMazeBFS()">Solve BFS</button>
         </div>
 
         <div class="size-controls flex flex-col items-center gap-4">
@@ -86,7 +152,7 @@
             <label for="heightSlider" class="text-lg font-semibold">Maze Height: <span id="heightValue">21</span></label>
             <input id="heightSlider" type="range" min="5" max="100" value="21">
             
-            <button onclick="resizeMaze()" class="text-lg font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out">Resize Maze</button>
+            <button onclick="resizeMaze()" class="text-lg font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out">Resize Maze</button>
         </div>
     </div>
 
