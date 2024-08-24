@@ -1,14 +1,14 @@
 const canvas = document.getElementById("mazeCanvas");
 const ctx = canvas.getContext("2d");
 
-const WIDTH = 21;  
-const HEIGHT = 21; 
+let WIDTH = 21;  
+let HEIGHT = 21; 
 const CELL_SIZE = 20;
 
 canvas.width = WIDTH * CELL_SIZE;
 canvas.height = HEIGHT * CELL_SIZE;
 
-const maze = Array.from({ length: WIDTH }, () => Array(HEIGHT).fill(1));
+let maze = Array.from({ length: WIDTH }, () => Array(HEIGHT).fill(1));
 const DIRECTIONS = [
     [0, 1],  
     [1, 0],  
@@ -55,12 +55,8 @@ async function drawPath() {
 }
 
 async function generateMazeDFS() {
-    for (let x = 0; x < WIDTH; x++) {
-        for (let y = 0; y < HEIGHT; y++) {
-            maze[x][y] = 1;
-        }
-    }
-
+    maze = Array.from({ length: WIDTH }, () => Array(HEIGHT).fill(1));
+    
     async function dfs(x, y) {
         maze[x][y] = 0;
         await drawMaze();
@@ -87,11 +83,7 @@ async function generateMazeDFS() {
 }
 
 async function generateMazeBFS() {
-    for (let x = 0; x < WIDTH; x++) {
-        for (let y = 0; y < HEIGHT; y++) {
-            maze[x][y] = 1;
-        }
-    }
+    maze = Array.from({ length: WIDTH }, () => Array(HEIGHT).fill(1));
 
     const queue = [];
     const start = [0, 0];
@@ -237,3 +229,30 @@ async function solveMazeBFS() {
 
     await drawPath();
 }
+
+function resizeMaze() {
+    const newWidth = parseInt(document.getElementById('widthSlider').value);
+    const newHeight = parseInt(document.getElementById('heightSlider').value);
+
+    if (newWidth >= 5 && newHeight >= 5) {
+        WIDTH = newWidth;
+        HEIGHT = newHeight;
+        canvas.width = WIDTH * CELL_SIZE;
+        canvas.height = HEIGHT * CELL_SIZE;
+        maze = Array.from({ length: WIDTH }, () => Array(HEIGHT).fill(1));
+        generateMazeDFS();
+    }
+}
+
+const widthSlider = document.getElementById('widthSlider');
+const heightSlider = document.getElementById('heightSlider');
+const widthValue = document.getElementById('widthValue');
+const heightValue = document.getElementById('heightValue');
+
+widthSlider.addEventListener('input', () => {
+    widthValue.textContent = widthSlider.value;
+});
+
+heightSlider.addEventListener('input', () => {
+    heightValue.textContent = heightSlider.value;
+});
