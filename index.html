@@ -10,26 +10,34 @@
             border: 2px solid #333;
             background-color: white;
         }
+        .control-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body class="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 font-sans m-0">
-    <div class="absolute top-8 flex gap-4">
-        <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="generateMazeDFS()">Generate DFS Maze</button>
-        <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-green-500 to-lime-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="generateMazeBFS()">Generate BFS Maze</button>
-        <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="solveMazeDFS()">Solve DFS</button>
-        <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="solveMazeBFS()">Solve BFS</button>
+    <div class="control-container flex flex-col items-center gap-4">
+        <div class="flex gap-4">
+            <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="generateMazeDFS()">Generate DFS Maze</button>
+            <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-green-500 to-lime-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="generateMazeBFS()">Generate BFS Maze</button>
+            <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="solveMazeDFS()">Solve DFS</button>
+            <button class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out" onclick="solveMazeBFS()">Solve BFS</button>
+        </div>
+        <div class="flex flex-col items-center gap-4">
+            <label for="widthSlider" class="text-xl font-semibold text-gray-800">Maze Width: <span id="widthValue">21</span></label>
+            <input id="widthSlider" type="range" min="5" max="100" value="21" class="w-64">
+            
+            <label for="heightSlider" class="text-xl font-semibold text-gray-800">Maze Height: <span id="heightValue">21</span></label>
+            <input id="heightSlider" type="range" min="5" max="100" value="21" class="w-64">
+            
+            <button onclick="resizeMaze()" class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out">Resize Maze</button>
+        </div>
     </div>
-    
-    <div class="absolute top-16 flex flex-col gap-4 items-center">
-        <label for="widthSlider" class="text-xl font-semibold text-white">Maze Width: <span id="widthValue">21</span></label>
-        <input id="widthSlider" type="range" min="5" max="100" value="21" class="w-64">
-        
-        <label for="heightSlider" class="text-xl font-semibold text-white">Maze Height: <span id="heightValue">21</span></label>
-        <input id="heightSlider" type="range" min="5" max="100" value="21" class="w-64">
-        
-        <button onclick="resizeMaze()" class="px-6 py-3 text-xl font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 ease-in-out">Resize Maze</button>
-    </div>
-    
+
     <canvas id="mazeCanvas"></canvas>
 
     <script src="maze.js"></script>
