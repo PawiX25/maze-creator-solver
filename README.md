@@ -13,6 +13,12 @@ Welcome to the Maze Creator and Solver project! This web application allows you 
 
 You can view a live demo of the application at [maze.pawix.tech](https://maze.pawix.tech).
 
+## Screenshot
+
+Here’s a screenshot of the application:
+
+![Maze Creator and Solver Screenshot](https://github.com/user-attachments/assets/70c242cc-7c53-4afb-979a-b432563b28d1)
+
 ## Getting Started
 
 To get started with this project locally, follow these steps:
@@ -53,4 +59,3 @@ To get started with this project locally, follow these steps:
 3. **Resize the Maze**:
     - Use the **"Maze Width"** and **"Maze Height"** sliders to adjust the maze's dimensions.
     - Click on **"Resize Maze"** to apply the new size.
-
